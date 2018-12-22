@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="icpc.njust.test.table.PhotostorageEntity" table="photostorage" schema="" catalog="classroom">
+    <class name="icpc.njust.test.table.PhotostorageEntity" table="photostorage">
         <id name="id" column="id"/>
         <property name="imageBase64" column="image_base64"/>
     </class>

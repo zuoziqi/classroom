@@ -4,9 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="icpc.njust.test.table.SpecificwarninginformationEntity" table="specificwarninginformation" schema=""
-           catalog="classroom">
-        <id name="warningid" column="warningid"/>
+    <class name="icpc.njust.test.table.SpecificwarninginformationEntity" table="specificwarninginformation">
+        <id name="warningid" column="warningid">
+            <generator class="uuid"></generator>
+        </id>
         <property name="id" column="id"/>
         <property name="classnumeber" column="classnumeber"/>
         <property name="classcnt" column="classcnt"/>

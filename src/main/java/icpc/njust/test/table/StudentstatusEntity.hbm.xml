@@ -4,8 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="icpc.njust.test.table.StudentstatusEntity" table="studentstatus" schema="" catalog="classroom">
-        <id name="recordid" column="recordid"/>
+    <class name="icpc.njust.test.table.StudentstatusEntity" table="studentstatus">
+        <id name="recordid" column="recordid">
+            <generator class="uuid"></generator>
+        </id>
         <property name="classid" column="classid"/>
         <property name="classcnt" column="classcnt"/>
         <property name="attend" column="attend"/>

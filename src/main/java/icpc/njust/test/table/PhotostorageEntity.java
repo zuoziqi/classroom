@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by DELL on 2018/12/22.
  */
 @Entity
-@Table(name = "photostorage", schema = "", catalog = "classroom")
+@Table(name = "photostorage", schema = "classroom", catalog = "classroom")
 public class PhotostorageEntity {
     private String id;
     private String imageBase64;
