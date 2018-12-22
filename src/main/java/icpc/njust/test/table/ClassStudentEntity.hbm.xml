@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="icpc.njust.test.table.ClassStudentEntity" table="class_student" schema="" catalog="classroom">
+        <id name="chooseid" column="chooseid"/>
+        <property name="id" column="id"/>
+        <property name="classid" column="classid"/>
+    </class>
+</hibernate-mapping>
