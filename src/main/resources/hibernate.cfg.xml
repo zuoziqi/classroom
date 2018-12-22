@@ -2,6 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
 <hibernate-configuration>
     <session-factory>
         <!--数据源-->
@@ -9,6 +10,14 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/classroom</property>
         <property name="connection.username">testroot</property>
         <property name="connection.password">testroot</property>
+        <!--扩展属性 必须指向数据库的方言-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <!--自动创建表 一般关着就行-->
+        <property name="hbm2ddl.auto">create-drop</property>
+        <!--显示SQL方便调试-->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <!--注册实体-->
         <mapping class="icpc.njust.test.table.ClassStudentEntity"/>
         <mapping resource="icpc/njust/test/table/ClassStudentEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.ClassTeacherEntity"/>
@@ -21,7 +30,5 @@
         <mapping resource="icpc/njust/test/table/SpecificwarninginformationEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.StudentstatusEntity"/>
         <mapping resource="icpc/njust/test/table/StudentstatusEntity.hbm.xml"/>
-        <!--注册实体-->
-
     </session-factory>
 </hibernate-configuration>
