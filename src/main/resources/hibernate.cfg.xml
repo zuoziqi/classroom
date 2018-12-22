@@ -7,6 +7,8 @@
         <!--数据源-->
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/classroom</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">n5682230671</property>
         <mapping class="icpc.njust.test.table.ClassStudentEntity"/>
         <mapping resource="icpc/njust/test/table/ClassStudentEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.ClassTeacherEntity"/>
