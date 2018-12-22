@@ -5,10 +5,20 @@
 <hibernate-configuration>
     <session-factory>
         <!--数据源-->
-        <property name="hibernate.connection.driver_class"></property>
-        <property name="hibernate.connection.url"></property>
-        <property name="hibernate.connection.username"></property>
-        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/classroom</property>
+        <mapping class="icpc.njust.test.table.ClassStudentEntity"/>
+        <mapping resource="icpc/njust/test/table/ClassStudentEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.ClassTeacherEntity"/>
+        <mapping resource="icpc/njust/test/table/ClassTeacherEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.PersonalinformationEntity"/>
+        <mapping resource="icpc/njust/test/table/PersonalinformationEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.PhotostorageEntity"/>
+        <mapping resource="icpc/njust/test/table/PhotostorageEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.SpecificwarninginformationEntity"/>
+        <mapping resource="icpc/njust/test/table/SpecificwarninginformationEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.StudentstatusEntity"/>
+        <mapping resource="icpc/njust/test/table/StudentstatusEntity.hbm.xml"/>
         <!--注册实体-->
 
     </session-factory>
