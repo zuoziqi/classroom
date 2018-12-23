@@ -24,12 +24,12 @@
         <mapping resource="icpc/njust/test/table/ClassStudentEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.ClassTeacherEntity"/>
         <mapping resource="icpc/njust/test/table/ClassTeacherEntity.hbm.xml"/>
-        <mapping class="icpc.njust.test.table.PersonalinformationEntity"/>
-        <mapping resource="icpc/njust/test/table/PersonalinformationEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.UserinfoEntity"/>
+        <mapping resource="icpc/njust/test/table/UserinfoEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.PhotostorageEntity"/>
         <mapping resource="icpc/njust/test/table/PhotostorageEntity.hbm.xml"/>
-        <mapping class="icpc.njust.test.table.SpecificwarninginformationEntity"/>
-        <mapping resource="icpc/njust/test/table/SpecificwarninginformationEntity.hbm.xml"/>
+        <mapping class="icpc.njust.test.table.WarninginfoEntity"/>
+        <mapping resource="icpc/njust/test/table/WarninginfoEntity.hbm.xml"/>
         <mapping class="icpc.njust.test.table.StudentstatusEntity"/>
         <mapping resource="icpc/njust/test/table/StudentstatusEntity.hbm.xml"/>
     </session-factory>

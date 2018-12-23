@@ -3,6 +3,7 @@ package icpc.njust.test.repository;
 
 import icpc.njust.test.Utils.HibernateUtils;
 import icpc.njust.test.table.ClassStudentEntity;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
-    public void addClassStudent(String chooseid, String id, String classid) {
+    public void addChoose(String chooseid, String id, String classid) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
@@ -25,33 +26,46 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
             session.save(classStudentEntity);
             transaction.commit();
             System.out.println("successful saved.");
-        }catch (Exception e) {
+        }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             throw e;
         }finally {
-            if(session!=null){
+            if(session!=null&&session.isOpen()){
                 session.close();
             }
         }
     }
 
     @Override
-    public void deleteClsaaStudent(String chooseid) {
-
+    public void deleteChoose(String chooseid) {
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            ClassStudentEntity classStudentEntity=new ClassStudentEntity();
+            classStudentEntity.setChooseid(chooseid);
+            session.delete(classStudentEntity);
+            transaction.commit();
+            System.out.println("successful saved.");
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
     }
 
     @Override
-    public List<ClassStudentEntity> showall() {
+    public List<ClassStudentEntity> find() {
+
         return null;
     }
 
     @Override
-    public ClassStudentEntity findClassStudent(String chooseid) {
+    public ClassStudentEntity findByChooseid(String chooseid) {
+
         return null;
     }
 
-    @Override
-    public void changeClassStudent(String chooseid, String id, String classid) {
-
-    }
 }

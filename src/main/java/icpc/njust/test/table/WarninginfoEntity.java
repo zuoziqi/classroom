@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by DELL on 2018/12/22.
  */
 @Entity
-@Table(name = "specificwarninginformation", schema = "classroom", catalog = "classroom")
-public class SpecificwarninginformationEntity {
+@Table(name = "warninginfo", schema = "classroom", catalog = "classroom")
+public class WarninginfoEntity {
     private String warningid;
     private String id;
     private String classnumeber;
@@ -80,7 +80,7 @@ public class SpecificwarninginformationEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SpecificwarninginformationEntity that = (SpecificwarninginformationEntity) o;
+        WarninginfoEntity that = (WarninginfoEntity) o;
 
         if (warningid != null ? !warningid.equals(that.warningid) : that.warningid != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
