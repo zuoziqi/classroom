@@ -45,7 +45,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
             classStudentEntity.setChooseid(chooseid);
             session.delete(classStudentEntity);
             transaction.commit();
-            System.out.println("successful saved.");
+            System.out.println("successful delete.");
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             throw e;
@@ -58,29 +58,82 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
     public void delete(String id, String classid) {
-
+        ClassStudentEntity classStudentEntity=null;
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            transaction.begin();
+            String hql="from ClassStudentEntity c where c.id=:id and c.classid=:classid";
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid);
+            session.delete(classStudentEntity);
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public List<ClassStudentEntity> showall() {
-        return null;
+        Session session= HibernateUtils.openSession();
+        try{
+            List<ClassStudentEntity> classStudentEntities=(List<ClassStudentEntity>)session.createQuery("from ClassStudentEntity");
+            //for(ClassStudentEntity classStudentEntity:classStudentEntities){}//test
+            return classStudentEntities;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
 
     @Override
     public ClassStudentEntity find(String chooseid) {
-
-        return null;
+        ClassStudentEntity classStudentEntity=new ClassStudentEntity();
+        Session session= HibernateUtils.openSession();
+        try{
+            String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
+            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
+            return classStudentEntity;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public List<ClassStudentEntity> findByClass(String classid) {
-        return null;
+        ClassStudentEntity classStudentEntity=new ClassStudentEntity();
+        Session session= HibernateUtils.openSession();
+        try{
+            String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
+            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
+            return classStudentEntity;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public List<ClassStudentEntity> findByStudent(String id) {
-        return null;
+        ClassStudentEntity classStudentEntity=new ClassStudentEntity();
+        Session session= HibernateUtils.openSession();
+        try{
+            String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
+            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
+            return classStudentEntity;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
 }

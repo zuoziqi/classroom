@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by DELL on 2018/12/22.
  */
-public class PhotostorageImpl implements PhotostorageDao {
+public class PhotostorageDaoImpl implements PhotostorageDao {
 
     @Override
     public void create(String id, String image_base64) {

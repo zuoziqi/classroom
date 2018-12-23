@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by DELL on 2018/12/22.
  */
-public class ClassTeacherImpl implements ClassTeacherDao {
+public class ClassTeacherDaoImpl implements ClassTeacherDao {
 
     @Override
     public void create(String classid, String id, String classname) {

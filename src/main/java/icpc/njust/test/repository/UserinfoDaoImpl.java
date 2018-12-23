@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by DELL on 2018/12/22.
  */
-public class UserinfoImpl implements UserinfoDao {
+public class UserinfoDaoImpl implements UserinfoDao {
 
     @Override
     public void create(String id, String name, String phone, String email, String school, String academy, String identity) {
