@@ -1,8 +1,9 @@
 package icpc.njust.test.repository;
 
-import com.mysql.cj.xdevapi.Session;
-import com.mysql.cj.xdevapi.SessionFactory;
+
+import icpc.njust.test.Utils.HibernateUtils;
 import icpc.njust.test.table.ClassStudentEntity;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import java.util.List;
@@ -11,15 +12,10 @@ import java.util.List;
  * Created by DELL on 2018/12/22.
  */
 public class ClassStudentDaoImpl implements ClassStudentDao {
-    private static SessionFactory sessionFactory;
-    static {
-        Configuration cfg=new Configuration();
-        cfg.configure();
-        sessionFactory= (SessionFactory) cfg.buildSessionFactory();
-    }
+
     @Override
     public void addClassStudent(String chooseid, String id, String classid) {
-        Session session=sessionFactory.openSession();
+        Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
