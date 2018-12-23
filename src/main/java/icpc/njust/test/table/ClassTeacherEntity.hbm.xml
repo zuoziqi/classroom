@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="icpc.njust.test.table.ClassTeacherEntity" table="class_teacher">
-        <id name="classid" column="classid"/>
+        <id name="classid" column="classid">
+            <generator class="assigned"></generator>
+        </id>
         <property name="id" column="id"/>
         <property name="classname" column="classname"/>
         <property name="classtimes" column="classtimes"/>
