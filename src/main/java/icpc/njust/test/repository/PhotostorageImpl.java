@@ -1,6 +1,7 @@
 package icpc.njust.test.repository;
 
-import icpc.njust.test.table.PersonalinformationEntity;
+import icpc.njust.test.table.PhotostorageEntity;
+import icpc.njust.test.table.UserinfoEntity;
 
 import java.util.List;
 
@@ -8,28 +9,29 @@ import java.util.List;
  * Created by DELL on 2018/12/22.
  */
 public class PhotostorageImpl implements PhotostorageDao {
+
     @Override
-    public void addPhotostorage(String id, String image_base64) {
+    public void create(String id, String image_base64) {
 
     }
 
     @Override
-    public void deletePhotostorage(String id) {
+    public void delete(String id) {
 
     }
 
     @Override
-    public List<PersonalinformationEntity> showall() {
+    public List<PhotostorageEntity> showall() {
         return null;
     }
 
     @Override
-    public PersonalinformationEntity findPhotostorage(String id) {
+    public PhotostorageEntity find(String id) {
         return null;
     }
 
     @Override
-    public void changePhotostorage(String id, String image_base64) {
+    public void update(String id, String image_base64) {
 
     }
 }

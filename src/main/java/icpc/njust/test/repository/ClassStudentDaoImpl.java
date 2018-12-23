@@ -15,7 +15,7 @@ import java.util.List;
 public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
-    public void addChoose(String chooseid, String id, String classid) {
+    public void create(String chooseid, String id, String classid) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
@@ -37,7 +37,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
     }
 
     @Override
-    public void deleteChoose(String chooseid) {
+    public void delete(String chooseid) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
@@ -57,14 +57,29 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
     }
 
     @Override
-    public List<ClassStudentEntity> find() {
+    public void delete(String id, String classid) {
+
+    }
+
+    @Override
+    public List<ClassStudentEntity> showall() {
+        return null;
+    }
+
+
+    @Override
+    public ClassStudentEntity find(String chooseid) {
 
         return null;
     }
 
     @Override
-    public ClassStudentEntity findByChooseid(String chooseid) {
+    public List<ClassStudentEntity> findByClass(String classid) {
+        return null;
+    }
 
+    @Override
+    public List<ClassStudentEntity> findByStudent(String id) {
         return null;
     }
 

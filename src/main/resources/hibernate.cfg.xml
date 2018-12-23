@@ -15,7 +15,7 @@
         <!--扩展属性 必须指向数据库的方言-->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <!--自动创建表 一般关着就行-->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
         <!--显示SQL方便调试-->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>

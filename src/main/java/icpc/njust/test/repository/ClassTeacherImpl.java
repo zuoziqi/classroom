@@ -1,6 +1,7 @@
 package icpc.njust.test.repository;
 
 import icpc.njust.test.table.ClassStudentEntity;
+import icpc.njust.test.table.ClassTeacherEntity;
 
 import java.util.List;
 
@@ -8,28 +9,49 @@ import java.util.List;
  * Created by DELL on 2018/12/22.
  */
 public class ClassTeacherImpl implements ClassTeacherDao {
+
     @Override
-    public void addClassTeacher(String classid, String id, String classname, String classtimes) {
+    public void create(String classid, String id, String classname) {
 
     }
 
     @Override
-    public void deleteClassTeacher(String classid) {
+    public void delete(String classid) {
 
     }
 
     @Override
-    public List<ClassStudentEntity> showall() {
+    public List<ClassTeacherEntity> showall() {
         return null;
     }
 
     @Override
-    public ClassStudentEntity findClassTeacher(String classid) {
+    public ClassTeacherEntity find(String classid) {
         return null;
     }
 
     @Override
-    public void changeClassTeacher(String classid, String id, String classname, String classtimes) {
+    public List<ClassTeacherEntity> findByTeacher(String teacherid) {
+        return null;
+    }
+
+    @Override
+    public void update(String classid, String id, String classname, String classtimes) {
+
+    }
+
+    @Override
+    public void updateTeacher(String teacherid) {
+
+    }
+
+    @Override
+    public void updateClassname(String classname) {
+
+    }
+
+    @Override
+    public void addClasstime() {
 
     }
 }
