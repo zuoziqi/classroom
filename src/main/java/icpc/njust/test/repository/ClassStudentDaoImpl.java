@@ -19,6 +19,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
+            transaction.begin();
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
             classStudentEntity.setChooseid(chooseid);
             classStudentEntity.setId(id);
@@ -41,6 +42,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
+            transaction.begin();
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
             classStudentEntity.setChooseid(chooseid);
             session.delete(classStudentEntity);
@@ -66,6 +68,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
             String hql="from ClassStudentEntity c where c.id=:id and c.classid=:classid";
             classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid);
             session.delete(classStudentEntity);
+            transaction.commit();
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             throw e;
@@ -108,12 +111,11 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
     public List<ClassStudentEntity> findByClass(String classid) {
-        ClassStudentEntity classStudentEntity=new ClassStudentEntity();
         Session session= HibernateUtils.openSession();
         try{
-            String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
-            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
-            return classStudentEntity;
+            String hql="from ClassStudentEntity as a where a.classid=:classid";
+            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("classid",classid);
+            return classStudentEntities;
         }finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -123,12 +125,11 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
     public List<ClassStudentEntity> findByStudent(String id) {
-        ClassStudentEntity classStudentEntity=new ClassStudentEntity();
         Session session= HibernateUtils.openSession();
         try{
-            String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
-            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
-            return classStudentEntity;
+            String hql="from ClassStudentEntity as a where a.id=:id";
+            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("id",id);
+            return classStudentEntities;
         }finally {
             if (session != null && session.isOpen()) {
                 session.close();

@@ -13,5 +13,5 @@ public interface UserinfoDao {
     List<UserinfoEntity> showall();//显示所有
     UserinfoEntity find(String id);//根据id查询
     void update(String id,String name,String phone,String email,String school,String academy,String identity);//更新
-    void updateInfo(String phone, String email, String school, String academy);//更新个人信息
+    void updateInfo(String id,String phone, String email, String school, String academy);//更新个人信息
 }
