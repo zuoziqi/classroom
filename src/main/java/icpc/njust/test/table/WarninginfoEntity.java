@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class WarninginfoEntity {
     private String warningid;
     private String id;
-    private String classnumeber;
+    private String classid;
     private String classcnt;
     private String warningcontent;
     private String time;
@@ -36,13 +36,13 @@ public class WarninginfoEntity {
     }
 
     @Basic
-    @Column(name = "classnumeber")
-    public String getClassnumeber() {
-        return classnumeber;
+    @Column(name = "classid")
+    public String getClassid() {
+        return classid;
     }
 
-    public void setClassnumeber(String classnumeber) {
-        this.classnumeber = classnumeber;
+    public void setClassid(String classid) {
+        this.classid = classid;
     }
 
     @Basic
@@ -84,7 +84,7 @@ public class WarninginfoEntity {
 
         if (warningid != null ? !warningid.equals(that.warningid) : that.warningid != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (classnumeber != null ? !classnumeber.equals(that.classnumeber) : that.classnumeber != null) return false;
+        if (classid != null ? !classid.equals(that.classid) : that.classid != null) return false;
         if (classcnt != null ? !classcnt.equals(that.classcnt) : that.classcnt != null) return false;
         if (warningcontent != null ? !warningcontent.equals(that.warningcontent) : that.warningcontent != null)
             return false;
@@ -97,7 +97,7 @@ public class WarninginfoEntity {
     public int hashCode() {
         int result = warningid != null ? warningid.hashCode() : 0;
         result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (classnumeber != null ? classnumeber.hashCode() : 0);
+        result = 31 * result + (classid != null ? classid.hashCode() : 0);
         result = 31 * result + (classcnt != null ? classcnt.hashCode() : 0);
         result = 31 * result + (warningcontent != null ? warningcontent.hashCode() : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);

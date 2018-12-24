@@ -9,7 +9,7 @@
             <generator class="uuid"></generator>
         </id>
         <property name="id" column="id"/>
-        <property name="classnumeber" column="classnumeber"/>
+        <property name="classid" column="classid"/>
         <property name="classcnt" column="classcnt"/>
         <property name="warningcontent" column="warningcontent"/>
         <property name="time" column="time"/>
