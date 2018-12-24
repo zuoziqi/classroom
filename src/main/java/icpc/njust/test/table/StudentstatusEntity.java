@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "studentstatus", schema = "classroom", catalog = "classroom")
 public class StudentstatusEntity {
     private String recordid;
+    private String studentid;
     private String classid;
     private String classcnt;
     private String attend;
@@ -23,6 +24,12 @@ public class StudentstatusEntity {
     public void setRecordid(String recordid) {
         this.recordid = recordid;
     }
+
+    @Basic
+    @Column(name="studentid")
+    public  String getStudentid(){return  studentid;}
+
+    public void setStudentid(String studentid){this.studentid=studentid;}
 
     @Basic
     @Column(name = "classid")
@@ -84,6 +91,7 @@ public class StudentstatusEntity {
     @Override
     public int hashCode() {
         int result = recordid != null ? recordid.hashCode() : 0;
+        result = 31 * result + (studentid != null ? studentid.hashCode() : 0);
         result = 31 * result + (classid != null ? classid.hashCode() : 0);
         result = 31 * result + (classcnt != null ? classcnt.hashCode() : 0);
         result = 31 * result + (attend != null ? attend.hashCode() : 0);

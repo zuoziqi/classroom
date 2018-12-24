@@ -46,6 +46,8 @@ public class UserinfoDaoImpl implements UserinfoDao {
             transaction.begin();
             String hql="from UserinfoEntity u where u.id=:id";
             UserinfoEntity userinfoEntity= (UserinfoEntity) session.createQuery(hql).setParameter("id",id).uniqueResult();
+            session.delete(userinfoEntity);
+            transaction.commit();
         }catch (HibernateException e) {
             if (transaction!=null) transaction.rollback();
             throw e;

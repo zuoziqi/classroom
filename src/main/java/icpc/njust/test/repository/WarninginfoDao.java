@@ -10,7 +10,7 @@ import java.util.List;
 public interface WarninginfoDao {
     void create(String studentid, String classid, String classcnt, String warningcontent, String time);//增加
     void delete(String warningid);//删除
-    void clear(String classid, String classcnt, String studentid);
+    void clear(String classnumber, String classcnt, String id);
     List<WarninginfoEntity> showall();//显示所有
     WarninginfoEntity find(String warningid);//根据id查询
     List<WarninginfoEntity> find(String classid, String classcnt, String studentid);//根据课和学生查询
