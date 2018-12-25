@@ -9,5 +9,6 @@
             <generator class="assigned"></generator>
         </id>
         <property name="imageBase64" column="image_base64"/>
+        <property name="facetoken" column="facetoken"/>
     </class>
 </hibernate-mapping>

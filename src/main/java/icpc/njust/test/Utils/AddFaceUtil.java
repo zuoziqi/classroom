@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-public class AddFaceUtil {
+public class AddFaceUtil {//用来在API的faceset中增加facetoken
     static String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/addface";
 
     public static void add(String token,String id) {

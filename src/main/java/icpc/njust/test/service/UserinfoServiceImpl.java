@@ -1,10 +1,17 @@
 package icpc.njust.test.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import icpc.njust.test.Utils.AddFaceUtil;
+import icpc.njust.test.Utils.FindFaceUtil;
 import icpc.njust.test.repository.*;
 import icpc.njust.test.table.UserinfoEntity;
 import icpc.njust.test.table.WarninginfoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service("UderinfoService")
 public class UserinfoServiceImpl implements UserinfoService {
@@ -27,13 +34,52 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     @Override
     public void adduser(String id, String name, String identity, String phone, String email, String school, String academy) {
-        //if(identity.compareTo("teacher")!=0 && identity.compareTo("student")!=0) return;
+//        if(identity.compareTo("teacher")!=0 && identity.compareTo("student")!=0){
+//                    System.out.println("身份不正确！");
+//                    return;
+//                }
         userinfoDao.create(id,name,phone,email,school,academy,identity);
         return;
     }
 
     @Override
+    public boolean addPhoto(String id, String image_base64) throws IOException {
+        String str = FindFaceUtil.checkFace(image_base64);
+        //System.out.print(str);
+        JSONObject json = JSON.parseObject(str);
+        try {
+            JSONArray faces = json.getJSONArray("faces");
+            if ("[]".equals(faces)) {
+                return false;
+            }
+            JSONObject josnToken = faces.getJSONObject(0);
+            String facetoken = josnToken.getString("face_token");
+            AddFaceUtil.add(facetoken,id);
+            photostorageDao.create(id,image_base64,facetoken);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void updatePhoto(String id, String image_base64) {
+
+    }
+
+    @Override
     public void updateuser(String id, String name, String identity, String phone, String email, String school, String academy) {
+        UserinfoEntity userinfoEntity=finduser(id);
+//        if(identity!=null && identity.compareTo("teacher")!=0 && identity.compareTo("student")!=0){
+//            System.out.println("身份不正确！");
+//            return;
+//        }
+        if(name==null) name=userinfoEntity.getName();
+        if(identity==null) identity=userinfoEntity.getIdentity();
+        if(phone==null) phone=userinfoEntity.getPhone();
+        if(email==null) email=userinfoEntity.getEmail();
+        if(school==null) school=userinfoEntity.getSchool();
+        if(academy==null) academy=userinfoEntity.getAcademy();
         userinfoDao.update(id,name,phone,email,school,academy,identity);
         return;
     }

@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class PhotostorageEntity {
     private String id;
     private String imageBase64;
+    private String facetoken;
 
     @Id
     @Column(name = "id")
@@ -29,6 +30,17 @@ public class PhotostorageEntity {
 
     public void setImageBase64(String imageBase64) {
         this.imageBase64 = imageBase64;
+    }
+
+    @Basic
+    @Column(name = "facetoken")
+
+    public String getFacetoken() {
+        return facetoken;
+    }
+
+    public void setFacetoken(String facetoken) {
+        this.facetoken = facetoken;
     }
 
     @Override

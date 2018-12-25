@@ -177,7 +177,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         try{
             transaction.begin();
             classTeacherEntity=session.find(ClassTeacherEntity.class,classid);
-            classTeacherEntity.setClasstimes(classTeacherEntity.getClassid()+1);
+            classTeacherEntity.setClasstimes(String.valueOf(Integer.valueOf(classTeacherEntity.getClasstimes())+1));
             session.save(classTeacherEntity);
             transaction.commit();
         }catch (Exception e) {

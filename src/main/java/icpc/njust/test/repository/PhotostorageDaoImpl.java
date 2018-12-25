@@ -15,13 +15,14 @@ import java.util.List;
 public class PhotostorageDaoImpl implements PhotostorageDao {
 
     @Override
-    public void create(String id, String image_base64) {
+    public void create(String id, String image_base64, String facetoken) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
             PhotostorageEntity photostorageEntity=new PhotostorageEntity();
             photostorageEntity.setId(id);
             photostorageEntity.setImageBase64(image_base64);
+            photostorageEntity.setFacetoken(facetoken);
             session.save(photostorageEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -82,13 +83,14 @@ public class PhotostorageDaoImpl implements PhotostorageDao {
     }
 
     @Override
-    public void update(String id, String image_base64) {
+    public void update(String id, String image_base64, String facetoken) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         PhotostorageEntity photostorageEntity=new PhotostorageEntity();
         try{
             photostorageEntity=session.find(PhotostorageEntity.class,id);
             photostorageEntity.setImageBase64(image_base64);
+            photostorageEntity.setFacetoken(facetoken);
             session.save(photostorageEntity);
             transaction.commit();
         }catch (Exception e) {

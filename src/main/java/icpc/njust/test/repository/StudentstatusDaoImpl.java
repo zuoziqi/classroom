@@ -135,10 +135,10 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
     }
 
     @Override
-    public StudentstatusEntity find(String id) {
+    public StudentstatusEntity find(String recordid) {
         Session session= HibernateUtils.openSession();
         try{
-            StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery("from StudentstatusEntity u where u.id=:id").setParameter("id",id).uniqueResult();
+            StudentstatusEntity studentstatusEntity= session.find(StudentstatusEntity.class,recordid);
             return studentstatusEntity;
         }finally {
             if(session!=null&&session.isOpen()){
@@ -170,6 +170,23 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
             List<StudentstatusEntity> studentstatusEntities=(List<StudentstatusEntity>)session.createQuery("from StudentstatusEntity s where s.classid=:classid and s.classcnt=:classcnt")
                     .setParameter("classid",classid)
                     .setParameter("classcnt",classcnt)
+                    .list();
+            return  studentstatusEntities;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public List<StudentstatusEntity> find(String classid, String classcnt, String studentid) {
+        Session session= HibernateUtils.openSession();
+        try{
+            List<StudentstatusEntity> studentstatusEntities=(List<StudentstatusEntity>)session.createQuery("from StudentstatusEntity s where s.classid=:classid and s.classcnt=:classcnt and s.studentid=:student")
+                    .setParameter("classid",classid)
+                    .setParameter("classcnt",classcnt)
+                    .setParameter("studentid",studentid)
                     .list();
             return  studentstatusEntities;
         }finally {
