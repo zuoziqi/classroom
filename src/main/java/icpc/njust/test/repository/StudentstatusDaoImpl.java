@@ -81,6 +81,46 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
     }
 
     @Override
+    public void clearByStudent(String studentid) {
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            transaction.begin();
+            String hql="from StudentstatusEntity s where s.id=:id";
+            StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery(hql).setParameter("id",studentid).uniqueResult();
+            session.delete(studentstatusEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void clearByClass(String classid) {
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            transaction.begin();
+            String hql="from StudentstatusEntity s where s.classid=:classid";
+            StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery(hql).setParameter("classid", classid).uniqueResult();
+            session.delete(studentstatusEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
     public List<StudentstatusEntity> showall() {
         Session session= HibernateUtils.openSession();
         try{
@@ -114,6 +154,22 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
             List<StudentstatusEntity> studentstatusEntities=(List<StudentstatusEntity>)session.createQuery("from StudentstatusEntity s where s.classid=:classid and s.studentid=:studentid")
                     .setParameter("classid",classid)
                     .setParameter("studentid",studentid)
+                    .list();
+            return  studentstatusEntities;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public List<StudentstatusEntity> findByOneClass(String classid, String classcnt) {
+        Session session= HibernateUtils.openSession();
+        try{
+            List<StudentstatusEntity> studentstatusEntities=(List<StudentstatusEntity>)session.createQuery("from StudentstatusEntity s where s.classid=:classid and s.classcnt=:classcnt")
+                    .setParameter("classid",classid)
+                    .setParameter("classcnt",classcnt)
                     .list();
             return  studentstatusEntities;
         }finally {
