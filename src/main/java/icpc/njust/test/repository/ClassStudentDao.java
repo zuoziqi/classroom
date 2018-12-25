@@ -8,9 +8,11 @@ import java.util.List;
  * Created by DELL on 2018/12/22.
  */
 public interface ClassStudentDao {
-    void create(String chooseid,String id,String classid);  // 创建
+    void create(String id,String classid);  // 创建
     void delete(String chooseid); //删除
     void delete(String id, String classid);//删除一个选择信息
+    void clearByStudent(String id);
+    void clearByClass(String classid);
 //    void clearByClass(String classid);//删除一门课的选课信息
 //    void clearByStudent(String id);//删除一个学生的选课信息
     List<ClassStudentEntity> showall();//显示所有

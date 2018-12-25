@@ -55,13 +55,13 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
     }
 
     @Override
-    public void clear(String classnumber, String classcnt, String id) {
+    public void clear(String classid, String classcnt, String id) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
             String hql="from WarninginfoEntity s where s.classid=:classnumber and s.classcnt=:classcnt and s.id=:studentid";
             WarninginfoEntity warninginfoEntity= (WarninginfoEntity) session.createQuery(hql)
-                    .setParameter("classnumber", classnumber)
+                    .setParameter("classnumber", classid)
                     .setParameter("classcnt", classcnt)
                     .setParameter("studentid", id)
                     .uniqueResult();
@@ -108,7 +108,7 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
     }
 
     @Override
-    public List<WarninginfoEntity> find(String classid, String classcnt, String studentid) {
+    public List<WarninginfoEntity> findByOneClassStudent(String classid, String classcnt, String studentid) {
         Session session= HibernateUtils.openSession();
         try{
             List<WarninginfoEntity> warninginfoEntities=(List<WarninginfoEntity>)session.createQuery("from WarninginfoEntity w where w.classid=:classid and w.classcnt=:classcnt and w.id=:id")

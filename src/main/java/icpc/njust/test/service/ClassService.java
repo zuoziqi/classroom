@@ -12,5 +12,5 @@ public interface ClassService {
     void addstudent(String classid, String studentid);
     ClassTeacherEntity findclass(String classid);
     List<ClassTeacherEntity> findByTeacher(String teacherid);
-    List<ClassTeacherEntity> findByStudent(String student);
+    List<ClassTeacherEntity> findByStudent(String studentid);
 }

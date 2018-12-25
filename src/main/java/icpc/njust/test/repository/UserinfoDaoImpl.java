@@ -91,12 +91,12 @@ public class UserinfoDaoImpl implements UserinfoDao {
         try{
             transaction.begin();
             UserinfoEntity userinfoEntity=session.find(UserinfoEntity.class,id);
-            userinfoEntity.setName(name);
-            userinfoEntity.setPhone(phone);
-            userinfoEntity.setEmail(email);
-            userinfoEntity.setSchool(school);
-            userinfoEntity.setAcademy(academy);
-            userinfoEntity.setIdentity(identity);
+            if(name!=null) userinfoEntity.setName(name);
+            if(phone!=null) userinfoEntity.setPhone(phone);
+            if(email!=null) userinfoEntity.setEmail(email);
+            if(school!=null) userinfoEntity.setSchool(school);
+            if(academy!=null) userinfoEntity.setAcademy(academy);
+            if(identity!=null) userinfoEntity.setIdentity(identity);
             session.save(userinfoEntity);
             transaction.commit();
         }catch (Exception e) {

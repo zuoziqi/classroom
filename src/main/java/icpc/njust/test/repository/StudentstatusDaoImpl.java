@@ -108,7 +108,7 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
     }
 
     @Override
-    public List<StudentstatusEntity> find(String classid, String studentid) {
+    public List<StudentstatusEntity> findByClassStudent(String classid, String studentid) {
         Session session= HibernateUtils.openSession();
         try{
             List<StudentstatusEntity> studentstatusEntities=(List<StudentstatusEntity>)session.createQuery("from StudentstatusEntity s where s.classid=:classid and s.studentid=:studentid")

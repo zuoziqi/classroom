@@ -15,13 +15,12 @@ import java.util.List;
 public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
-    public void create(String chooseid, String id, String classid) {
+    public void create(String id, String classid) {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
             transaction.begin();
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
-            classStudentEntity.setChooseid(chooseid);
             classStudentEntity.setId(id);
             classStudentEntity.setClassid(classid);
             session.save(classStudentEntity);
@@ -67,6 +66,48 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
             transaction.begin();
             String hql="from ClassStudentEntity c where c.id=:id and c.classid=:classid";
             classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid);
+            session.delete(classStudentEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void clearByStudent(String id) {
+        ClassStudentEntity classStudentEntity=null;
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            transaction.begin();
+            String hql="from ClassStudentEntity c where c.id=:id";
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id);
+            session.delete(classStudentEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void clearByClass(String classid) {
+        ClassStudentEntity classStudentEntity=null;
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            transaction.begin();
+            String hql="from ClassStudentEntity c where c.classid=:classid";
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("classid",classid);
             session.delete(classStudentEntity);
             transaction.commit();
         }catch (HibernateException e) {
