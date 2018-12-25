@@ -36,7 +36,7 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public void deleteclass(String classid) {
         classStudentDao.clearByClass(classid);
-        warninginfoDao.cleatByClass(classid);
+        warninginfoDao.clearByClass(classid);
         classTeacherDao.delete(classid);
     }
 
