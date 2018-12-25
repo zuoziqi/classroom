@@ -78,6 +78,46 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
     }
 
     @Override
+    public void clearByClass(String classid) {
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            WarninginfoEntity warninginfoEntity=new WarninginfoEntity();
+            String hql="from WarninginfoEntity w where w.classid=:classid";
+            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("classid",classid);
+            session.delete(warninginfoEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void clearByStudent(String studentid) {
+        Session session= HibernateUtils.openSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            WarninginfoEntity warninginfoEntity=new WarninginfoEntity();
+            String hql="from WarninginfoEntity w where w.id=:id";
+            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("id",studentid);
+            session.delete(warninginfoEntity);
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction!=null) transaction.rollback();
+            throw e;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
     public List<WarninginfoEntity> showall() {
         Session session= HibernateUtils.openSession();
 
@@ -100,6 +140,38 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
                 .setParameter("warningid", warningid)
                 .uniqueResult();
             return warninginfoEntity;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public List<WarninginfoEntity> findByOneClass(String classid, String classcnt) {
+        Session session= HibernateUtils.openSession();
+        try{
+            List<WarninginfoEntity> warninginfoEntities=(List<WarninginfoEntity>)session.createQuery("from WarninginfoEntity w where w.classid=:classid and w.classcnt=:classcnt")
+                    .setParameter("classid",classid)
+                    .setParameter("classcnt",classcnt)
+                    .list();
+            return warninginfoEntities;
+        }finally {
+            if(session!=null&&session.isOpen()){
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public List<WarninginfoEntity> findByClassStudent(String classid, String studentid) {
+        Session session= HibernateUtils.openSession();
+        try{
+            List<WarninginfoEntity> warninginfoEntities=(List<WarninginfoEntity>)session.createQuery("from WarninginfoEntity w where w.classid=:classid and w.id=:id")
+                    .setParameter("classid",classid)
+                    .setParameter("id",studentid)
+                    .list();
+            return warninginfoEntities;
         }finally {
             if(session!=null&&session.isOpen()){
                 session.close();

@@ -11,7 +11,7 @@ public interface WarninginfoDao {
     void create(String studentid, String classid, String classcnt, String warningcontent, String time);//增加
     void delete(String warningid);//删除
     void clear(String classid, String classcnt, String id);
-    void cleatByClass(String classid);
+    void clearByClass(String classid);
     void clearByStudent(String studentid);
     List<WarninginfoEntity> showall();//显示所有
     WarninginfoEntity find(String warningid);//根据id查询
