@@ -16,6 +16,6 @@ public interface StudentstatusDao {
     List<StudentstatusEntity> findByClassStudent(String classid, String studentid);//根据课和学生查询
     List<StudentstatusEntity> findByOneClass(String classid, String classcnt);//根据一节课查询
     List<StudentstatusEntity> find(String classid, String classcnt, String studentid);
-    void update(String recordid,String studentid, String classid, String classcnt, String attend, String warningnumber);//更新
+    void update(String recordid, String studentid, String classid, String classcnt, String attend, String warningnumber);//更新
 
 }
