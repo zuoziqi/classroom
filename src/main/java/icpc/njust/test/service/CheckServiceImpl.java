@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,18 +25,20 @@ public class CheckServiceImpl implements CheckService {
     private final PhotostorageDao photostorageDao;
     private final StudentstatusDao studentstatusDao;
     private final WarninginfoDao warninginfoDao;
+    private final UserinfoDao userinfoDao;
     @Autowired
     public CheckServiceImpl(ClassStudentDao classStudentDao, ClassTeacherDao classTeacherDao, PhotostorageDao photostorageDao,
-                            StudentstatusDao studentstatusDao, WarninginfoDao warninginfoDao) {
+                            StudentstatusDao studentstatusDao, WarninginfoDao warninginfoDao, UserinfoDao userinfoDao) {
         this.classStudentDao=classStudentDao;
         this.classTeacherDao=classTeacherDao;
         this.photostorageDao=photostorageDao;
         this.studentstatusDao = studentstatusDao;
         this.warninginfoDao = warninginfoDao;
+        this.userinfoDao = userinfoDao;
     }
 
     @Override
-    public void signin(String classid, String image_base64, String time) throws IOException {
+    public void signin(String classid, String image_base64) throws IOException {
         classTeacherDao.addClasstime(classid);
         String classcnt=classTeacherDao.find(classid).getClasstimes();
         List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
@@ -73,7 +76,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void checkstatus(String classid, String image_base64, String time) throws IOException {
+    public void checkstatus(String classid, String image_base64) throws IOException {
         classTeacherDao.addClasstime(classid);
         String classcnt=classTeacherDao.find(classid).getClasstimes();
         List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
@@ -126,8 +129,18 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<StudentstatusEntity> findstatusByOneclass(String classid, String classcnt) {
-        return studentstatusDao.findByOneClass(classid,classcnt);
+    public List findstatusByOneclass(String classid, String classcnt) {
+        List<StudentstatusEntity> studentstatuslist = studentstatusDao.findByOneClass(classid,classcnt);
+        List<MyStudentStatus> mylist = new ArrayList<MyStudentStatus>();
+        for(int i=0; i<studentstatuslist.size(); i++){
+            MyStudentStatus myStudentStatus = new MyStudentStatus();
+            myStudentStatus.setId(studentstatuslist.get(i).getStudentid());
+            myStudentStatus.setAttend(studentstatuslist.get(i).getAttend());
+            myStudentStatus.setWarningnumber(studentstatuslist.get(i).getWarningnumber());
+            myStudentStatus.setName(userinfoDao.find(studentstatuslist.get(i).getStudentid()).getName());
+            mylist.add(myStudentStatus);
+        }
+        return mylist;
     }
 
     @Override
@@ -143,5 +156,44 @@ public class CheckServiceImpl implements CheckService {
     @Override
     public List<WarninginfoEntity> findwarningByStudent(String classid, String studentid) {
         return warninginfoDao.findByClassStudent(classid,studentid);
+    }
+}
+
+class MyStudentStatus{
+    private String id;
+    private String name;
+    private String attend;
+    private String warningnumber;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAttend() {
+        return attend;
+    }
+
+    public void setAttend(String attend) {
+        this.attend = attend;
+    }
+
+    public String getWarningnumber() {
+        return warningnumber;
+    }
+
+    public void setWarningnumber(String warningnumber) {
+        this.warningnumber = warningnumber;
     }
 }

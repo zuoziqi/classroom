@@ -20,7 +20,7 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             StudentstatusEntity studentstatusEntity=new StudentstatusEntity();
             studentstatusEntity.setStudentid(studentid);
             studentstatusEntity.setClassid(classid);
@@ -44,7 +44,7 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from StudentstatusEntity s where s.recordid=:recordid";
             StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery(hql).setParameter("recordid",recordid).uniqueResult();
             session.delete(studentstatusEntity);
@@ -87,7 +87,7 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from StudentstatusEntity s where s.id=:id";
             StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery(hql).setParameter("id",studentid).uniqueResult();
             session.delete(studentstatusEntity);
@@ -107,7 +107,7 @@ public class StudentstatusDaoImpl implements StudentstatusDao{
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from StudentstatusEntity s where s.classid=:classid";
             StudentstatusEntity studentstatusEntity= (StudentstatusEntity) session.createQuery(hql).setParameter("classid", classid).uniqueResult();
             session.delete(studentstatusEntity);

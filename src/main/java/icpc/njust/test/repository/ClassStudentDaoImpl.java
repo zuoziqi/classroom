@@ -17,12 +17,14 @@ import java.util.List;
 @Repository("ClassStudentDao")
 public class ClassStudentDaoImpl implements ClassStudentDao {
 
+
     @Override
     public void create(String id, String classid) {
-        Session session= HibernateUtils.openSession();
-        Transaction transaction=session.beginTransaction();
+       Session session=null;
+       Transaction transaction=null;
         try{
-            transaction.begin();
+            session= HibernateUtils.openSession();
+            transaction=session.beginTransaction();
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
             classStudentEntity.setId(id);
             classStudentEntity.setClassid(classid);
@@ -44,7 +46,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             ClassStudentEntity classStudentEntity=new ClassStudentEntity();
             classStudentEntity.setChooseid(chooseid);
             session.delete(classStudentEntity);
@@ -66,7 +68,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from ClassStudentEntity c where c.id=:id and c.classid=:classid";
             classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid);
             session.delete(classStudentEntity);
@@ -87,7 +89,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from ClassStudentEntity c where c.id=:id";
             classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id);
             session.delete(classStudentEntity);
@@ -108,7 +110,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from ClassStudentEntity c where c.classid=:classid";
             classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("classid",classid);
             session.delete(classStudentEntity);

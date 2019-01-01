@@ -1,7 +1,6 @@
 package icpc.njust.test.repository;
 
 import icpc.njust.test.Utils.HibernateUtils;
-import icpc.njust.test.table.ClassStudentEntity;
 import icpc.njust.test.table.ClassTeacherEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -22,11 +21,12 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             ClassTeacherEntity classTeacherEntity=new ClassTeacherEntity();
             classTeacherEntity.setClassname(classname);
             classTeacherEntity.setId(id);
             classTeacherEntity.setClassid(classid);
+            classTeacherEntity.setClasstimes("0");
             session.save(classTeacherEntity);
             transaction.commit();
             System.out.println("successful saved.");
@@ -45,7 +45,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from ClassTeacherEntity c where c.classid=:classid";
             ClassTeacherEntity classTeacherEntity= (ClassTeacherEntity) session.createQuery(hql).setParameter("classid",classid).uniqueResult();
             session.delete(classTeacherEntity);
@@ -107,7 +107,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="update ClassTeacherEntity c set c.classid=:classid,c.id=:id,c.classname=:classname,c.classtimes=:classtimes";
             classTeacherEntity=session.createQuery(hql).setParameter("classid",classid).setParameter("id",id).setParameter("classname",classname).setParameter("classtimes",classtimes);
             ClassTeacherEntity classTeacherEntity1=new ClassTeacherEntity();
@@ -134,7 +134,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="update ClassTeacherEntity c set c.id=:id where c.classid=:classid";
             classTeacherEntity=session.createQuery(hql).setParameter("id",teacherid).setParameter("classid",classid);
             classTeacherEntity.executeUpdate();
@@ -155,7 +155,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="update ClassTeacherEntity c set c.classname=:classname where c.classid=:classid";
             classTeacherEntity=session.createQuery(hql).setParameter("classname",classname).setParameter("classid",classid);
             classTeacherEntity.executeUpdate();
@@ -177,7 +177,7 @@ public class ClassTeacherDaoImpl implements ClassTeacherDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             classTeacherEntity=session.find(ClassTeacherEntity.class,classid);
             classTeacherEntity.setClasstimes(String.valueOf(Integer.valueOf(classTeacherEntity.getClasstimes())+1));
             session.save(classTeacherEntity);

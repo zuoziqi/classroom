@@ -45,7 +45,7 @@ public class UserinfoDaoImpl implements UserinfoDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             String hql="from UserinfoEntity u where u.id=:id";
             UserinfoEntity userinfoEntity= (UserinfoEntity) session.createQuery(hql).setParameter("id",id).uniqueResult();
             session.delete(userinfoEntity);
@@ -91,7 +91,7 @@ public class UserinfoDaoImpl implements UserinfoDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             UserinfoEntity userinfoEntity=session.find(UserinfoEntity.class,id);
             if(name!=null) userinfoEntity.setName(name);
             if(phone!=null) userinfoEntity.setPhone(phone);
@@ -116,7 +116,7 @@ public class UserinfoDaoImpl implements UserinfoDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //transaction.begin();
             UserinfoEntity userinfoEntity=session.find(UserinfoEntity.class,id);
             userinfoEntity.setPhone(phone);
             userinfoEntity.setEmail(email);

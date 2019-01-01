@@ -42,7 +42,8 @@ public class PhotostorageDaoImpl implements PhotostorageDao {
         Session session= HibernateUtils.openSession();
         Transaction transaction=session.beginTransaction();
         try{
-            transaction.begin();
+            //
+
             String hql="from PhotostorageEntity p where p.id=:id";
             PhotostorageEntity photostorageEntity= (PhotostorageEntity) session.createQuery(hql).setParameter("id",id);
             session.delete(photostorageEntity);
