@@ -6,12 +6,14 @@ import icpc.njust.test.table.UserinfoEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by DELL on 2018/12/22.
  */
+@Repository("PhotostorageDao")
 public class PhotostorageDaoImpl implements PhotostorageDao {
 
     @Override

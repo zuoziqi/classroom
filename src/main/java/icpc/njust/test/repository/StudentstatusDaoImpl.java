@@ -6,12 +6,14 @@ import icpc.njust.test.table.WarninginfoEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by DELL on 2018/12/23.
  */
+@Repository("StudentstatusDao")
 public class StudentstatusDaoImpl implements StudentstatusDao{
     @Override
     public void create(String studentid, String classid, String classcnt, String attend, String warningnumber) {

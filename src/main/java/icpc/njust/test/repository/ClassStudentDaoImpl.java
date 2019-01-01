@@ -7,11 +7,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * Created by DELL on 2018/12/22.
  */
+@Repository("ClassStudentDao")
 public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
