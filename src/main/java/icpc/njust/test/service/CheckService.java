@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface CheckService {
-    void signin(String classid, String image_base64) throws IOException;
-    void checkstatus(String classid, String image_base64) throws IOException;
+    void signin(String classid, String image_base64) throws Exception;
+    void checkstatus(String classid, String image_base64) throws Exception;
     List findstatusByOneclass(String classid, String classcnt);
     List<StudentstatusEntity> findstatusByStudent(String classid, String studentid);
     List<WarninginfoEntity> findwarningByOneclass(String classid, String classcnt);

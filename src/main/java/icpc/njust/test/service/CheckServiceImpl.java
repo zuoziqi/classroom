@@ -38,13 +38,13 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void signin(String classid, String image_base64) throws IOException {
+    public void signin(String classid, String image_base64) throws Exception {
         classTeacherDao.addClasstime(classid);
         String classcnt=classTeacherDao.find(classid).getClasstimes();
         List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
         int totstudents = studentlist.size();//应到总人数
 
-        String str = FindFaceUtil.checkFace(image_base64);
+        String str = FindFaceUtil.detectFace(image_base64);
         //System.out.print(str);
         JSONObject json = JSON.parseObject(str);
         JSONArray faces = json.getJSONArray("faces");
@@ -76,13 +76,13 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void checkstatus(String classid, String image_base64) throws IOException {
+    public void checkstatus(String classid, String image_base64) throws Exception {
         classTeacherDao.addClasstime(classid);
         String classcnt=classTeacherDao.find(classid).getClasstimes();
         List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
         int totstudents = studentlist.size();//应到总人数
 
-        String str = FindFaceUtil.checkFace(image_base64);
+        String str = FindFaceUtil.detectFace(image_base64);
         //System.out.print(str);
         JSONObject json = JSON.parseObject(str);
         JSONArray faces = json.getJSONArray("faces");

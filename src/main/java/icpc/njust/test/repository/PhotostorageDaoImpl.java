@@ -45,7 +45,7 @@ public class PhotostorageDaoImpl implements PhotostorageDao {
             //
 
             String hql="from PhotostorageEntity p where p.id=:id";
-            PhotostorageEntity photostorageEntity= (PhotostorageEntity) session.createQuery(hql).setParameter("id",id);
+            PhotostorageEntity photostorageEntity= (PhotostorageEntity) session.createQuery(hql).setParameter("id",id).uniqueResult();
             session.delete(photostorageEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -62,7 +62,7 @@ public class PhotostorageDaoImpl implements PhotostorageDao {
     public List<PhotostorageEntity> showall() {
         Session session= HibernateUtils.openSession();
         try{
-            List<PhotostorageEntity> photostorageEntities=(List<PhotostorageEntity>)session.createQuery("from PhotostorageEntity");
+            List<PhotostorageEntity> photostorageEntities=(List<PhotostorageEntity>)session.createQuery("from PhotostorageEntity").list();
             return photostorageEntities;
         }finally {
             if (session != null && session.isOpen()) {
@@ -76,7 +76,7 @@ public class PhotostorageDaoImpl implements PhotostorageDao {
         PhotostorageEntity photostorageEntity=new PhotostorageEntity();
         Session session= HibernateUtils.openSession();
         try{
-            photostorageEntity= (PhotostorageEntity) session.createQuery("from PhotostorageEntity p where p.id=:id").setParameter("id",id);
+            photostorageEntity= (PhotostorageEntity) session.createQuery("from PhotostorageEntity p where p.id=:id").setParameter("id",id).uniqueResult();
             return photostorageEntity;
         }finally {
             if (session != null && session.isOpen()) {

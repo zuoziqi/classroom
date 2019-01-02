@@ -16,8 +16,8 @@ public class CompareFaceUtil {//用来返回对比两个face_token的调用
     static String url = "https://api-cn.faceplusplus.com/facepp/v3/compare";
     public static String compare(String token1,String token2){
         HashMap<String, String> map = new HashMap<>();
-        map.put("api_key", "_WbTER4zNul6ANRxxupYZNtl6pNw8cQC");
-        map.put("api_secret", "jEJ_oR0HjmEhkM5nEWYsWx_YfOKn7uNb");
+        map.put("api_key", "NzYeCu98GK840P4He1jOOfRLlWPQZF1x");
+        map.put("api_secret", "IDCUAzFp8Ade-3NH8to4ajzlVBamy2tT");
         map.put("face_token1", token1);
         map.put("face_token2",token2);
         String str =null;

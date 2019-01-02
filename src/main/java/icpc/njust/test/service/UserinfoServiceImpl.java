@@ -43,8 +43,8 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     @Override
-    public boolean addPhoto(String id, String image_base64) throws IOException {
-        String str = FindFaceUtil.checkFace(image_base64);
+    public boolean addPhoto(String id, String image_base64) throws Exception {
+        String str = FindFaceUtil.detectFace(image_base64);
         //System.out.print(str);
         JSONObject json = JSON.parseObject(str);
         try {
@@ -54,8 +54,9 @@ public class UserinfoServiceImpl implements UserinfoService {
             }
             JSONObject josnToken = faces.getJSONObject(0);
             String facetoken = josnToken.getString("face_token");
-            AddFaceUtil.add(facetoken,id);
-            photostorageDao.create(id,image_base64,facetoken);
+            AddFaceUtil.add(facetoken,"classroom");
+            //图片太大了，本地数据库存不下，先别存了，也能跑！
+            photostorageDao.create(id,null,facetoken);
             return true;
         }catch (Exception e) {
             return false;
