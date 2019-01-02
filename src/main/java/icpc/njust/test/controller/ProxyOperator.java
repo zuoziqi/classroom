@@ -3,7 +3,8 @@ package icpc.njust.test.controller;
 import com.alibaba.fastjson.JSON;
 import icpc.njust.test.service.CheckService;
 import icpc.njust.test.service.ClassService;
-import icpc.njust.test.service.UserinfoService;
+import icpc.njust.test.service.MessageQueueService;
+import icpc.njust.test.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,13 +19,20 @@ import java.util.Map;
 public class ProxyOperator {
     private final CheckService checkService;
     private final ClassService classService;
-    private final UserinfoService userinfoService;
+    private final UserInfoService userinfoService;
+    private final MessageQueueService messageQueueService;
     private Map<String,Class> proxyMapping;
+
+    public Map<String, Class> getProxyMapping() {
+        return proxyMapping;
+    }
+
     @Autowired
-    public ProxyOperator(CheckService checkService, ClassService classService, UserinfoService userinfoService) {
+    public ProxyOperator(CheckService checkService, ClassService classService, UserInfoService userinfoService, MessageQueueService messageQueueService) {
         this.checkService = checkService;
         this.classService = classService;
         this.userinfoService = userinfoService;
+        this.messageQueueService = messageQueueService;
         Method[] checkMethods=checkService.getClass().getMethods();
         Method[] classMethods=classService.getClass().getMethods();
         Method[] userinfoMethods=userinfoService.getClass().getMethods();

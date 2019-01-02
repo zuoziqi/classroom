@@ -24,53 +24,86 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public void addclass(String classid, String classname, String teacherid) {
+    //String classid, String classname, String teacherid
+    public List<String> addClass(Object[] argument) {
+        String classid=argument[0].toString();
+        String classname=argument[1].toString();
+        String teacherid=argument[2].toString();
         classTeacherDao.create(classid,teacherid,classname);
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public void changeteacher(String classid, String teacherid) {
+    //String classid, String teacherid
+    public List<String> changeteacher(Object[] argument) {
+        String classid=argument[0].toString();
+        String teacherid=argument[1].toString();
         classTeacherDao.updateTeacher(classid,teacherid);
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public void deleteclass(String classid) {
+    //String classid
+    public List<String> deleteclass(Object[] argument) {
+        String classid=argument[0].toString();
         classStudentDao.clearByClass(classid);
         warninginfoDao.clearByClass(classid);
         classTeacherDao.delete(classid);
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public void clear() {
+    public List<String> clear() {
         //先扔着，反正估计到最后也用不着。
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public void addstudent(String classid, String studentid) {
+    //String classid, String studentid
+    public List<String> addstudent(Object[] argument) {
+        String classid=argument[0].toString();
+        String studentid=argument[1].toString();
         if(classTeacherDao.find(classid)==null){
             System.out.println("classid为"+classid+"的课不存在");
         }
         else{
             classStudentDao.create(studentid,classid);
         }
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public ClassTeacherEntity findclass(String classid) {
+    //String classid
+    public ClassTeacherEntity findclass(Object[] argument) {
+        String classid=argument[0].toString();
         return classTeacherDao.find(classid);
     }
 
     @Override
-    public List<ClassTeacherEntity> findByTeacher(String teacherid) {
+    //String teacherid
+    public List<ClassTeacherEntity> findByTeacher(Object[] argument) {
+        String teacherid=argument[0].toString();
         return classTeacherDao.findByTeacher(teacherid);
     }
 
     @Override
-    public List<ClassTeacherEntity> findByStudent(String studentid) {
+    //String studentid
+    public List<ClassTeacherEntity> findByStudent(Object[] argument) {
+        String studentid=argument[0].toString();
         List<ClassStudentEntity> classlist =classStudentDao.findByStudent(studentid);
         List<ClassTeacherEntity> mylist = new ArrayList<>();
-        for(int i=0; i<classlist.size(); i++){
-            mylist.add(classTeacherDao.find(classlist.get(i).getClassid()));
+        for (ClassStudentEntity classStudentEntity : classlist) {
+            mylist.add(classTeacherDao.find(classStudentEntity.getClassid()));
         }
         return mylist;
     }

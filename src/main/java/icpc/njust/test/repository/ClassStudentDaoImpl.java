@@ -6,7 +6,6 @@ import icpc.njust.test.table.ClassStudentEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +19,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
 
     @Override
     public void create(String id, String classid) {
+
        Session session=null;
        Transaction transaction=null;
         try{

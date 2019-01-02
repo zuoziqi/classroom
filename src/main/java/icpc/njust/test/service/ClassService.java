@@ -5,12 +5,12 @@ import icpc.njust.test.table.ClassTeacherEntity;
 import java.util.List;
 
 public interface ClassService {
-    void addclass(String classid, String classname, String teacherid);
-    void changeteacher(String classid, String teacherid);
-    void deleteclass(String classid);
-    void clear();
-    void addstudent(String classid, String studentid);
-    ClassTeacherEntity findclass(String classid);
-    List<ClassTeacherEntity> findByTeacher(String teacherid);
-    List<ClassTeacherEntity> findByStudent(String studentid);
+    List<String> addClass(Object[] argument);
+    List<String> changeteacher(Object[] argument);
+    List<String> deleteclass(Object[] argument);
+    List<String> clear();
+    List<String> addstudent(Object[] argument);
+    ClassTeacherEntity findclass(Object[] argument);
+    List<ClassTeacherEntity> findByTeacher(Object[] argument);
+    List<ClassTeacherEntity> findByStudent(Object[] argument);
 }

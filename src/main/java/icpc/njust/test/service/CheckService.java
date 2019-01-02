@@ -3,14 +3,13 @@ package icpc.njust.test.service;
 import icpc.njust.test.table.StudentstatusEntity;
 import icpc.njust.test.table.WarninginfoEntity;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface CheckService {
-    void signin(String classid, String image_base64) throws Exception;
-    void checkstatus(String classid, String image_base64) throws Exception;
-    List findstatusByOneclass(String classid, String classcnt);
-    List<StudentstatusEntity> findstatusByStudent(String classid, String studentid);
-    List<WarninginfoEntity> findwarningByOneclass(String classid, String classcnt);
-    List<WarninginfoEntity> findwarningByStudent(String classid, String studentid);
+    List<String> signin(Object[] argument) throws Exception;
+    List<String> checkstatus(Object[] argument) throws Exception;
+    List findstatusByOneclass(Object[] argument);
+    List<StudentstatusEntity> findstatusByStudent(Object[] argument);
+    List<WarninginfoEntity> findwarningByOneclass(Object[] argument);
+    List<WarninginfoEntity> findwarningByStudent(Object[] argument);
 }

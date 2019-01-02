@@ -37,13 +37,14 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public void signin(String classid, String image_base64) throws Exception {
-        classTeacherDao.addClasstime(classid);
-        String classcnt=classTeacherDao.find(classid).getClasstimes();
-        List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
+    //String classid, String image_base64
+    public List<String> signin(Object[] argument) throws Exception {
+        classTeacherDao.addClasstime(argument[0].toString());
+        String classcnt=classTeacherDao.find(argument[0].toString()).getClasstimes();
+        List<ClassStudentEntity> studentlist=classStudentDao.findByClass(argument[0].toString());
         int totstudents = studentlist.size();//应到总人数
 
-        String str = FindFaceUtil.detectFace(image_base64);
+        String str = FindFaceUtil.detectFace(argument[1].toString());
         //System.out.print(str);
         JSONObject json = JSON.parseObject(str);
         JSONArray faces = json.getJSONArray("faces");
@@ -64,24 +65,26 @@ public class CheckServiceImpl implements CheckService {
                 }
             }
             if(flag){
-                studentstatusDao.create(studentlist.get(i).getId(),classid,classcnt,"attended","0");
+                studentstatusDao.create(studentlist.get(i).getId(),argument[0].toString(),classcnt,"attended","0");
             }
             else{
-                studentstatusDao.create(studentlist.get(i).getId(),classid,classcnt,"absent","1");
+                studentstatusDao.create(studentlist.get(i).getId(),argument[0].toString(),classcnt,"absent","1");
             }
         }
-
-        return;
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public void checkstatus(String classid, String image_base64) throws Exception {
-        classTeacherDao.addClasstime(classid);
-        String classcnt=classTeacherDao.find(classid).getClasstimes();
-        List<ClassStudentEntity> studentlist=classStudentDao.findByClass(classid);
+    //String classid, String image_base64
+    public List<String> checkstatus(Object[] argument) throws Exception {
+        classTeacherDao.addClasstime(argument[0].toString());
+        String classcnt=classTeacherDao.find(argument[0].toString()).getClasstimes();
+        List<ClassStudentEntity> studentlist=classStudentDao.findByClass(argument[0].toString());
         int totstudents = studentlist.size();//应到总人数
 
-        String str = FindFaceUtil.detectFace(image_base64);
+        String str = FindFaceUtil.detectFace(argument[1].toString());
         //System.out.print(str);
         JSONObject json = JSON.parseObject(str);
         JSONArray faces = json.getJSONArray("faces");
@@ -102,33 +105,37 @@ public class CheckServiceImpl implements CheckService {
                 }
             }
             String studentid=studentlist.get(i).getId();
-            StudentstatusEntity studentstatusEntity=studentstatusDao.find(classid,classcnt,studentid).get(0);
+            StudentstatusEntity studentstatusEntity=studentstatusDao.find(argument[0].toString(),classcnt,studentid).get(0);
             if(flag){//匹配上了
                 if(studentstatusEntity.getAttend().compareTo("absent")==0){
                     studentstatusEntity.setAttend("belate");
                 }
-                studentstatusDao.update(studentstatusEntity.getRecordid(),studentid,classid,classcnt,studentstatusEntity.getAttend(),studentstatusEntity.getWarningnumber());
+                studentstatusDao.update(studentstatusEntity.getRecordid(),studentid,argument[0].toString(),classcnt,studentstatusEntity.getAttend(),studentstatusEntity.getWarningnumber());
             }
             else{//没匹配上
                 String warningnumber=String.valueOf(Integer.valueOf(studentstatusEntity.getWarningnumber())+1);
-                studentstatusDao.update(studentstatusEntity.getRecordid(),studentid,classid,classcnt,studentstatusEntity.getAttend(),warningnumber);
+                studentstatusDao.update(studentstatusEntity.getRecordid(),studentid,argument[0].toString(),classcnt,studentstatusEntity.getAttend(),warningnumber);
                 WarninginfoEntity warninginfoEntity = new WarninginfoEntity();
                 warninginfoEntity.setClasscnt(classcnt);
-                warninginfoEntity.setClassid(classid);
+                warninginfoEntity.setClassid(argument[0].toString());
                 warninginfoEntity.setId(studentid);
                 Date now=new Date();
                 warninginfoEntity.setTime(now.toString());
                 warninginfoEntity.setWarningcontent("请不要上课开小差23333");
-                warninginfoDao.create(studentid,classid,classcnt,"请不要上课开小差23333",now.toString());
+                warninginfoDao.create(studentid,argument[0].toString(),classcnt,"请不要上课开小差23333",now.toString());
                 WarnUtil.warn(warninginfoEntity);
             }
         }
-
-        return;
+        List<String> result=new ArrayList<>();
+        result.add("Success");
+        return result;
     }
 
     @Override
-    public List findstatusByOneclass(String classid, String classcnt) {
+    //String classid, String classcnt
+    public List findstatusByOneclass(Object[] argument) {
+        String classid=argument[0].toString();
+        String classcnt=argument[1].toString();
         List<StudentstatusEntity> studentstatuslist = studentstatusDao.findByOneClass(classid,classcnt);
         List<MyStudentStatus> mylist = new ArrayList<MyStudentStatus>();
         for(int i=0; i<studentstatuslist.size(); i++){
@@ -143,56 +150,27 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<StudentstatusEntity> findstatusByStudent(String classid, String studentid) {
+    //String classid, String studentid
+    public List<StudentstatusEntity> findstatusByStudent(Object[] argument) {
+        String classid = argument[0].toString();
+        String studentid = argument[1].toString();
        return studentstatusDao.findByClassStudent(classid,studentid);
     }
 
     @Override
-    public List<WarninginfoEntity> findwarningByOneclass(String classid, String classcnt) {
+    //String classid, String classcnt
+    public List<WarninginfoEntity> findwarningByOneclass(Object[] argument) {
+        String classid=argument[0].toString();
+        String classcnt=argument[1].toString();
         return warninginfoDao.findByOneClass(classid,classcnt);
     }
 
     @Override
-    public List<WarninginfoEntity> findwarningByStudent(String classid, String studentid) {
+    //String classid, String studentid
+    public List<WarninginfoEntity> findwarningByStudent(Object[] argument) {
+        String classid=argument[0].toString();
+        String studentid=argument[1].toString();
         return warninginfoDao.findByClassStudent(classid,studentid);
     }
 }
 
-class MyStudentStatus{
-    private String id;
-    private String name;
-    private String attend;
-    private String warningnumber;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAttend() {
-        return attend;
-    }
-
-    public void setAttend(String attend) {
-        this.attend = attend;
-    }
-
-    public String getWarningnumber() {
-        return warningnumber;
-    }
-
-    public void setWarningnumber(String warningnumber) {
-        this.warningnumber = warningnumber;
-    }
-}
