@@ -43,7 +43,7 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
         try{
             WarninginfoEntity warninginfoEntity=new WarninginfoEntity();
             String hql="from WarninginfoEntity w where w.warningid=:warningid";
-            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("warningid",warningid);
+            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("warningid",warningid).uniqueResult();
             session.delete(warninginfoEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -106,7 +106,7 @@ public class WarninginfoDaoImpl implements WarninginfoDao{
         try{
             WarninginfoEntity warninginfoEntity=new WarninginfoEntity();
             String hql="from WarninginfoEntity w where w.id=:id";
-            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("id",studentid);
+            warninginfoEntity= (WarninginfoEntity) session.createQuery(hql).setParameter("id",studentid).uniqueResult();
             session.delete(warninginfoEntity);
             transaction.commit();
         }catch (HibernateException e) {

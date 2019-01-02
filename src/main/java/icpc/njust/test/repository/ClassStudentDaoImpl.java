@@ -70,7 +70,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         try{
             //transaction.begin();
             String hql="from ClassStudentEntity c where c.id=:id and c.classid=:classid";
-            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid);
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).setParameter("classid",classid).uniqueResult();
             session.delete(classStudentEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -91,7 +91,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         try{
             //transaction.begin();
             String hql="from ClassStudentEntity c where c.id=:id";
-            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id);
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("id",id).uniqueResult();
             session.delete(classStudentEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -112,7 +112,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         try{
             //transaction.begin();
             String hql="from ClassStudentEntity c where c.classid=:classid";
-            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("classid",classid);
+            classStudentEntity=(ClassStudentEntity)session.createQuery(hql).setParameter("classid",classid).uniqueResult();
             session.delete(classStudentEntity);
             transaction.commit();
         }catch (HibernateException e) {
@@ -129,7 +129,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
     public List<ClassStudentEntity> showall() {
         Session session= HibernateUtils.openSession();
         try{
-            List<ClassStudentEntity> classStudentEntities=(List<ClassStudentEntity>)session.createQuery("from ClassStudentEntity");
+            List<ClassStudentEntity> classStudentEntities=(List<ClassStudentEntity>)session.createQuery("from ClassStudentEntity").list();
             //for(ClassStudentEntity classStudentEntity:classStudentEntities){}//test
             return classStudentEntities;
         }finally {
@@ -146,7 +146,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         try{
             String hql="from ClassStudentEntity as a where a.chooseid=:chooseid";
-            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid);
+            classStudentEntity= (ClassStudentEntity) session.createQuery(hql).setParameter("chooseid",chooseid).uniqueResult();
             return classStudentEntity;
         }finally {
             if (session != null && session.isOpen()) {
@@ -160,7 +160,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         try{
             String hql="from ClassStudentEntity as a where a.classid=:classid";
-            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("classid",classid);
+            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("classid",classid).list();
             return classStudentEntities;
         }finally {
             if (session != null && session.isOpen()) {
@@ -174,7 +174,7 @@ public class ClassStudentDaoImpl implements ClassStudentDao {
         Session session= HibernateUtils.openSession();
         try{
             String hql="from ClassStudentEntity as a where a.id=:id";
-            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("id",id);
+            List<ClassStudentEntity> classStudentEntities= (List<ClassStudentEntity>) session.createQuery(hql).setParameter("id",id).list();
             return classStudentEntities;
         }finally {
             if (session != null && session.isOpen()) {

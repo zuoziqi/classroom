@@ -12,16 +12,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-public class AddFaceUtil {//用来在API的faceset中增加facetoken
-    static String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/addface";
+public class CreateSetUtil {
+    static String url = "https://api-cn.faceplusplus.com/facepp/v3/faceset/create";
 
-    public static void add(String token,String id) {
-        System.out.println("id"+id);
+    public static void create(String id) {
+        //System.out.println("id"+id);
         HashMap<String, String> map = new HashMap<>();
         map.put("api_key", "NzYeCu98GK840P4He1jOOfRLlWPQZF1x");
         map.put("api_secret", "IDCUAzFp8Ade-3NH8to4ajzlVBamy2tT");
         map.put("outer_id", id);
-        map.put("face_tokens", token);
         //map.put("return_attributes", "gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus");
         String str =null;
         try{
@@ -31,7 +30,7 @@ public class AddFaceUtil {//用来在API的faceset中增加facetoken
         }catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.print("add结果"+str);
+        System.out.print("create结果"+str);
     }
     /**
      * Base64字符串转 二进制流
