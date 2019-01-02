@@ -12,12 +12,11 @@ import icpc.njust.test.table.StudentstatusEntity;
 import icpc.njust.test.table.WarninginfoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 @Service("CheckService")
 public class CheckServiceImpl implements CheckService {
     private final ClassStudentDao classStudentDao;
