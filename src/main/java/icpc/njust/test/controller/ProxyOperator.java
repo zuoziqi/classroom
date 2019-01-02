@@ -7,7 +7,6 @@ import icpc.njust.test.service.MessageQueueService;
 import icpc.njust.test.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Component("ProxyOperator")
 public class ProxyOperator {
     private final CheckService checkService;
     private final ClassService classService;

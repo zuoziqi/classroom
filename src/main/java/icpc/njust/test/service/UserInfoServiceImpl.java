@@ -12,8 +12,6 @@ import icpc.njust.test.table.UserinfoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-import sun.plugin2.message.Message;
-
 import javax.annotation.Resource;
 import javax.jms.Destination;
 import javax.jms.JMSException;
